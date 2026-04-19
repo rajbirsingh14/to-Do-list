@@ -184,7 +184,7 @@ function setDate() {
   dateElement.textContent = today.toLocaleDateString("en-US", options);
 }
 
-
+// ── Init ──
 window.addEventListener("DOMContentLoaded", () => {
   loadTheme();
   loadTodos();

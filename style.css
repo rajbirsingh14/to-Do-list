@@ -400,6 +400,7 @@ header p {
   flex-shrink: 0;
 }
 
+/* making delete button visible */
 .todo-item:hover .delete-btn {
   opacity: 1;
 }
