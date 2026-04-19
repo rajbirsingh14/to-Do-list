@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Light Mode Variables (default) ── */
+:root {
+  --primary: #5c3bcc;
+  --primary-light: #7c5ce8;
+  --primary-glow: rgba(92, 59, 204, 0.15);
+
+  --bg-page: #ece9f8;
+  --bg-app: #ffffff;
+  --bg-input-area: #f5f3ff;
+  --bg-input: #ffffff;
+  --bg-item-hover: #f5f3ff;
+  --bg-item-done: #fafafa;
+  --bg-footer: #f5f3ff;
+
+  --text: #2e2640;
+  --text-muted: #8b85a0;
+
+  --border: rgba(92, 59, 204, 0.12);
+  --border-light: rgba(0, 0, 0, 0.07);
+  --input-border: rgba(0, 0, 0, 0.12);
+
+  --success: #2ecc82;
+  --danger: #e84545;
+
+  --shadow: 0 20px 60px rgba(92, 59, 204, 0.16);
+
+  --toggle-bg: #ffffff;
+  --toggle-border: rgba(92, 59, 204, 0.2);
+  --toggle-color: #5c3bcc;
+  --toggle-shadow: 0 4px 14px rgba(92, 59, 204, 0.2);
+}
+
+/* ── Dark Mode Variables ── */
+[data-theme="dark"] {
+  --primary: #7c5ce8;
+  --primary-light: #a78bfa;
+  --primary-glow: rgba(124, 92, 232, 0.2);
+
+  --bg-page: #0f0e17;
+  --bg-app: #1a1825;
+  --bg-input-area: #201e2e;
+  --bg-input: #2a2740;
+  --bg-item-hover: rgba(124, 92, 232, 0.07);
+  --bg-item-done: rgba(0, 0, 0, 0.15);
+  --bg-footer: #201e2e;
+
+  --text: rgba(255, 255, 255, 0.88);
+  --text-muted: rgba(255, 255, 255, 0.35);
+
+  --border: rgba(124, 92, 232, 0.2);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --input-border: rgba(255, 255, 255, 0.08);
+
+  --success: #2ecc82;
+  --danger: #e84545;
+
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 92, 232, 0.15);
+
+  --toggle-bg: #2a2740;
+  --toggle-border: rgba(255, 255, 255, 0.1);
+  --toggle-color: #a78bfa;
+  --toggle-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Base ── */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg-page);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(124, 92, 232, 0.1) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(240, 165, 0, 0.07) 0%, transparent 55%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  color: var(--text);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ── Theme Toggle Button ── */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--toggle-border);
+  background: var(--toggle-bg);
+  color: var(--toggle-color);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--toggle-shadow);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+#theme-toggle:hover {
+  transform: rotate(20deg) scale(1.08);
+  box-shadow: 0 6px 20px rgba(124, 92, 232, 0.35);
+}
+
+/* ── App Card ── */
+.app {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-app);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ── */
+header {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  color: white;
+  padding: 28px 26px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -30px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+header h1 .fa-check-circle {
+  font-size: 22px;
+  color: #f0c040;
+}
+
+header p {
+  font-size: 13px;
+  opacity: 0.75;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Input Area ── */
+.todo-input {
+  padding: 18px 22px;
+  display: flex;
+  gap: 10px;
+  background: var(--bg-input-area);
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.35s ease;
+}
+
+.todo-input input {
+  flex: 1;
+  padding: 0 16px;
+  height: 48px;
+  border: 1.5px solid var(--input-border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg-input);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.todo-input input::placeholder {
+  color: var(--text-muted);
+}
+
+.todo-input input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.todo-input button {
+  background: var(--primary);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.todo-input button:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 92, 232, 0.4);
+}
+
+.todo-input button:active {
+  transform: translateY(0);
+}
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-light);
+  padding: 13px 22px;
+  background: var(--bg-app);
+  transition: background-color 0.35s ease;
+}
+
+.filter {
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.filter:hover {
+  color: var(--primary);
+  background: var(--primary-glow);
+}
+
+.filter.active {
+  color: var(--primary);
+  background: var(--primary-glow);
+  font-weight: 600;
+}
+
+/* ── Todo List ── */
+.todos-container {
+  padding: 6px 0;
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.todos-container::-webkit-scrollbar { width: 4px; }
+.todos-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+#todos-list {
+  list-style-type: none;
+}
+
+.todo-item {
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.2s ease, border-left-color 0.2s ease;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background-color: var(--bg-item-hover);
+  border-left-color: var(--primary-light);
+}
+
+.todo-item.completed {
+  background-color: var(--bg-item-done);
+}
+
+/* ── Checkbox ── */
+.checkbox-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.todo-checkbox {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.checkmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--input-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--bg-input);
+}
+
+.checkmark:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.todo-checkbox:checked + .checkmark {
+  background: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 2px 10px rgba(46, 204, 130, 0.4);
+}
+
+.todo-checkbox:checked + .checkmark::after {
+  content: "";
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-1px);
+  display: block;
+}
+
+/* ── Task Text ── */
+.todo-item-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+.todo-item.completed .todo-item-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ── Delete Button ── */
+.delete-btn {
+  background: none;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.todo-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+  background: rgba(232, 69, 69, 0.12);
+}
+
+/* ── Empty State ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0 44px;
+  color: var(--text-muted);
+  gap: 10px;
+}
+
+.empty-state i {
+  font-size: 44px;
+  color: var(--primary-light);
+  opacity: 0.45;
+  margin-bottom: 4px;
+}
+
+.empty-state p {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.empty-state p::after {
+  content: 'Add a task above to get started.';
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.65;
+  margin-top: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ── Footer ── */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-footer);
+  transition: background-color 0.35s ease;
+}
+
+#items-left {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+#clear-completed {
+  background: var(--bg-app);
+  border: 1.5px solid var(--border-light);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+#clear-completed:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(232, 69, 69, 0.06);
+}
